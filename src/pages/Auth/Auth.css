@@ -1,0 +1,225 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  box-sizing: border-box;
+}
+
+@font-face {
+  font-family: Metropolis;
+  src: url(../../assets/fonts/Metropolis/Metropolis-Regular.otf);
+}
+
+.container {
+  display: flex;
+  height: 1024px;
+  font-family: Metropolis;
+}
+/* SIDE CONTENT */
+.side-content {
+  background: rgba(55, 106, 237);
+  flex: 1;
+  padding: 5.25% 8%;
+  color: white;
+  max-width: 50%;
+}
+
+.side-header {
+  display: flex;
+  column-gap: 30px;
+}
+
+.back-arrow,
+.side-header-title {
+  position: relative;
+  left: -30px;
+}
+
+.side-header-title {
+  font-size: 24px;
+  font-weight: 800;
+}
+
+.side-title {
+  width: 100%;
+  text-align: center;
+}
+
+.title {
+  font-weight: 900;
+  font-size: 72px;
+  line-height: 98px;
+}
+
+.email {
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 33px;
+  text-decoration: underline solid;
+  cursor: pointer;
+}
+
+.has-account {
+  display: flex;
+  column-gap: 10px;
+  align-items: center;
+}
+
+.has-account-text {
+  flex: 2;
+  font-size: 16px;
+  font-weight: 800;
+  line-height: 30px;
+  text-align: center;
+}
+
+.underline {
+  flex: 1;
+  height: 1px;
+  border-bottom: 2px solid white;
+}
+
+.login-button {
+  display: flex;
+  background: rgba(13, 37, 60);
+  font-size: 20px;
+  font-weight: 800;
+  line-height: 25px;
+  height: 75px;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px;
+  cursor: pointer;
+  box-shadow: 0px 6px 20px 0px rgba(13, 37, 60, 0.4);
+}
+
+.login-button:active {
+  background: rgb(20, 56, 90);
+}
+
+.side-info {
+  margin-top: 160px;
+  height: 100px;
+  display: grid;
+  grid-template-columns: 45% 35%;
+  column-gap: 20%;
+  grid-template-rows: 50% 50%;
+}
+
+.info-text {
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 33px;
+}
+
+/* MAIN CONTENT */
+.main-content {
+  flex: 1;
+  max-width: 50%;
+  padding: 5.25% 6.5%;
+}
+
+.main-header-title {
+  font-size: 2.25rem;
+  font-weight: 900;
+  line-height: 49px;
+  color: rgba(13, 37, 60, 1);
+}
+
+.main-header-info {
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 25px;
+  color: rgba(123, 139, 178, 1);
+}
+
+.register-form {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  font-size: 20px;
+  font-weight: 800;
+  line-height: 27px;
+  color: rgba(13, 37, 60, 1);
+}
+
+.auth-input-text,
+.auth-input-password,
+.register-submit {
+  border: 1px solid rgba(206, 225, 242, 1);
+  width: 100%;
+  height: 75px;
+  padding: 25px 30px;
+  border-radius: 20px;
+}
+
+.auth-input-text,
+.auth-input-password {
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 27px;
+}
+
+.register-submit {
+  margin: 20px 0px;
+  box-shadow: 0px 6px 20px 0px rgba(55, 106, 237, 0.41);
+  border: none;
+  background: rgba(55, 106, 237, 1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  font-size: 20px;
+  font-weight: 800;
+  line-height: 25px;
+  color: white;
+}
+
+.register-submit:active {
+  background: rgb(74, 123, 249);
+}
+
+.other-signup-method {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  row-gap: 23px;
+}
+
+.signup-method {
+  font-size: 18px;
+  font-weight: 800;
+  line-height: 18px;
+  letter-spacing: 1.75px;
+}
+
+.signup-method-icon {
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
+  padding: 0 50px;
+  height: 53px;
+}
+
+.login-button,
+.register-submit,
+.email {
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -o-user-select: none;
+}
+
+@media (max-width: 756px) {
+  .side-content {
+    display: none;
+  }
+  .main-content {
+    max-width: 100%;
+  }
+}
