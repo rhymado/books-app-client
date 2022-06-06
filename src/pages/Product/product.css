@@ -1,0 +1,56 @@
+.product-wrapper {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  min-height: 100vh;
+}
+
+.list-wrapper {
+  flex: 3;
+}
+.cashier-wrapper {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+}
+.list-wrapper,
+.cashier-wrapper {
+  border: 2px solid black;
+}
+
+.card-book {
+  border: 2px solid black;
+  padding: 2px;
+  min-width: 40%;
+}
+
+.book-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.book-wrapper,
+.cashier-wrapper {
+  row-gap: 20px;
+}
+
+.card-book,
+.remove {
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -o-user-select: none;
+}
+
+.remove {
+  text-decoration: underline;
+  text-align: right;
+  font-style: italic;
+}
+
+.clickable {
+  cursor: pointer;
+}

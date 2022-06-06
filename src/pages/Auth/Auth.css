@@ -10,9 +10,9 @@
   src: url(../../assets/fonts/Metropolis/Metropolis-Regular.otf);
 }
 
-.container {
+.container-auth {
   display: flex;
-  height: 1024px;
+  /* height: 1024px; */
   font-family: Metropolis;
 }
 /* SIDE CONTENT */

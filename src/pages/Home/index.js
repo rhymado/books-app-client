@@ -8,6 +8,8 @@ import Header from "../../components/Header";
 // import withParams from "../../helper/withParams";
 import withSearchParams from "../../helper/withSearchParams";
 
+import { themeContext } from "../../contexts/themeContext";
+
 class Home extends Component {
   constructor() {
     super();
@@ -15,7 +17,6 @@ class Home extends Component {
       books: [],
       bookName: "",
       isFetching: false,
-      theme: "dark",
     };
   }
   sayHello = (word) => {
@@ -45,6 +46,7 @@ class Home extends Component {
   render() {
     // console.log("name", this.props.searchParams.get("name"));
     // console.log("location", this.props.searchParams.get("location"));
+    // console.log("Context", this.context.theme, themes[this.context.theme]);
     // baris code
     return (
       // akan mereturnkan element html
@@ -52,9 +54,8 @@ class Home extends Component {
       // ternary operator => shorthand dari if else
       // kondisi ? logika true : logika false
       <div
-        className={`App App-header ${
-          this.state.theme === "dark" ? "dark" : "light"
-        }`}
+        className={`App App-header ${this.context.theme}`}
+        // style={themes[this.context.theme]}
       >
         <Header bookName={this.state.bookName} greeting={this.sayHello} />
         <form
@@ -70,15 +71,18 @@ class Home extends Component {
           <button type="submit">Change</button>
         </form>
         <button
-          onClick={() => {
-            let newTheme = "dark";
-            if (this.state.theme === "dark") {
-              newTheme = "light";
-            }
-            this.setState({
-              theme: newTheme,
-            });
-          }}
+          onClick={
+            //   () => {
+            //   let newTheme = "dark";
+            //   if (this.state.theme === "dark") {
+            //     newTheme = "light";
+            //   }
+            //   this.setState({
+            //     theme: newTheme,
+            //   });
+            // }
+            this.context.onChangeTheme
+          }
         >
           Toggle Theme
         </button>
@@ -101,5 +105,6 @@ class Home extends Component {
     );
   }
 }
+Home.contextType = themeContext;
 
 export default withSearchParams(Home);

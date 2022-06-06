@@ -9,6 +9,8 @@ import Facebook from "../../assets/img/facebook.png";
 import Twitter from "../../assets/img/twitter.png";
 import BackArrow from "../../assets/img/back-arrow.png";
 
+import { themeContext, themes } from "../../contexts/themeContext";
+
 import "./Auth.css";
 
 class Auth extends Component {
@@ -63,9 +65,14 @@ class Auth extends Component {
   };
   render() {
     return (
-      <div className="container">
+      <div className="container-auth">
         <aside className="side-content">
-          <header className="side-header">
+          <header
+            className="side-header clickable"
+            onClick={() => {
+              this.props.navigate("/");
+            }}
+          >
             <img src={BackArrow} alt="back-arrow" className="back-arrow" />
             <p className="side-header-title">Home Page</p>
           </header>
@@ -92,7 +99,7 @@ class Auth extends Component {
             <p className="info-text">FAQ</p>
           </section>
         </aside>
-        <main className="main-content">
+        <main className="main-content" style={themes[this.context.theme]}>
           <header className="main-header">
             <p className="main-header-title">Sign Up</p>
             <p className="main-header-info">
@@ -198,6 +205,7 @@ class Auth extends Component {
     );
   }
 }
+Auth.contextType = themeContext;
 
 const withLocationAndNavigate = (Component) => {
   const WithLocationAndNavigate = () => {
