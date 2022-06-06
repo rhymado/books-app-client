@@ -1,13 +1,15 @@
 import "bootstrap/dist/css/bootstrap.min.css";
+import "./index.css";
+
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 
-import "./index.css";
 import Home from "./pages/Home";
 import Auth from "./pages/Auth";
 import Profile from "./pages/Profile";
+import PrivateElement from "./components/PrivateElement";
 
 function App() {
   return (
@@ -15,7 +17,18 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/auth" element={<Auth />} />
-        <Route path="/profile/:id" element={<Profile />} />
+        <Route
+          path="/profile/:id"
+          element={
+            <PrivateElement
+              redirectedTo="/auth"
+              extraData={{ isAuthenticated: false }}
+            >
+              <Profile />
+            </PrivateElement>
+          }
+        />
+        {/* <Route path="/profile/:id" element={<Profile />} /> */}
         <Route
           path="*"
           element={

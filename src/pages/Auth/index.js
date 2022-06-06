@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 // import { Link } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
+import Modal from "react-bootstrap/Modal";
 
 import Google from "../../assets/img/google.png";
 import Facebook from "../../assets/img/facebook.png";
@@ -17,10 +19,49 @@ class Auth extends Component {
     isPasswordShown: false,
     isError: false,
     errorMsg: "",
+    isShow: false,
+    isLoading: false,
+  };
+  componentDidMount() {
+    const { state = null } = this.props.location;
+    if (state !== null && !state.isAuthenticated) {
+      this.setState({
+        isShow: true,
+      });
+    }
+  }
+  registerUser = () => {
+    setTimeout(() => {
+      const { email, pass, phone } = this.state;
+      const body = {
+        email,
+        pass,
+        phone,
+      };
+      axios
+        .post("http://localhost:8080/auth/new", body)
+        .then((result) => {
+          console.log(result.data);
+          localStorage.setItem(
+            "userinfo-book",
+            JSON.stringify(result.data.list)
+          );
+          this.setState({
+            isError: false,
+            errorMsg: "",
+            isLoading: false,
+          });
+        })
+        .catch((error) => {
+          this.setState({
+            isError: true,
+            errorMsg: error.response.data.err.msg,
+            isLoading: false,
+          });
+        });
+    }, 1000);
   };
   render() {
-    const userInfo = JSON.parse(localStorage.getItem("userinfo-book"));
-    console.log(userInfo.token);
     return (
       <div className="container">
         <aside className="side-content">
@@ -117,34 +158,20 @@ class Auth extends Component {
             <div
               className="register-submit"
               onClick={() => {
-                const { email, pass, phone } = this.state;
-                const body = {
-                  email,
-                  pass,
-                  phone,
-                };
-                axios
-                  .post("http://localhost:8080/auth/", body)
-                  .then((result) => {
-                    console.log(result.data);
-                    localStorage.setItem(
-                      "userinfo-book",
-                      JSON.stringify(result.data.list)
-                    );
-                    this.setState({
-                      isError: false,
-                      errorMsg: "",
-                    });
-                  })
-                  .catch((error) => {
-                    this.setState({
-                      isError: true,
-                      errorMsg: error.response.data.err.msg,
-                    });
-                  });
+                if (!this.state.isLoading)
+                  this.setState(
+                    {
+                      isLoading: true,
+                    },
+                    this.registerUser
+                  );
               }}
             >
-              Sign Up
+              {this.state.isLoading ? (
+                <div className="loader"></div>
+              ) : (
+                "Sign Up"
+              )}
             </div>
           </form>
           <section className="other-signup-method">
@@ -156,9 +183,29 @@ class Auth extends Component {
             </section>
           </section>
         </main>
+        <Modal
+          show={this.state.isShow}
+          onHide={() => {
+            this.setState({ isShow: false }, () =>
+              this.props.navigate("/auth", { replace: true, state: null })
+            );
+          }}
+        >
+          <Modal.Title>Warning</Modal.Title>
+          <Modal.Body>Silahkan Login Terlebih Dahulu</Modal.Body>
+        </Modal>
       </div>
     );
   }
 }
 
-export default Auth;
+const withLocationAndNavigate = (Component) => {
+  const WithLocationAndNavigate = () => {
+    const location = useLocation();
+    const navigate = useNavigate();
+    return <Component location={location} navigate={navigate} />;
+  };
+  return WithLocationAndNavigate;
+};
+
+export default withLocationAndNavigate(Auth);
