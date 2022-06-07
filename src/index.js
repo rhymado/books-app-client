@@ -5,6 +5,9 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Button from "react-bootstrap/Button";
+import { Provider as ReduxProvider } from "react-redux";
+
+import store from "./redux/store";
 
 import Home from "./pages/Home";
 import Auth from "./pages/Auth";
@@ -32,39 +35,41 @@ function App() {
     setCart(newCart);
   };
   return (
-    <CartProvider value={{ cart, onAddToCart, onDeleteCart }}>
-      <ThemeProvider value={{ theme, onChangeTheme }}>
-        <Router>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/auth" element={<Auth />} />
-            <Route
-              path="/profile/:id"
-              element={
-                <PrivateElement
-                  redirectedTo="/auth"
-                  extraData={{ isAuthenticated: false }}
-                >
-                  <Profile />
-                </PrivateElement>
-              }
-            />
-            <Route path="/product" element={<Product />} />
-            {/* <Route path="/profile/:id" element={<Profile />} /> */}
-            <Route
-              path="*"
-              element={
-                <main className="d-flex justify-content-center align-items-center p-4 fw-bold">
-                  <Button variant="success" className="big">
-                    <p>There's nothing here!</p>
-                  </Button>
-                </main>
-              }
-            />
-          </Routes>
-        </Router>
-      </ThemeProvider>
-    </CartProvider>
+    <ReduxProvider store={store}>
+      <CartProvider value={{ cart, onAddToCart, onDeleteCart }}>
+        <ThemeProvider value={{ theme, onChangeTheme }}>
+          <Router>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/auth" element={<Auth />} />
+              <Route
+                path="/profile/:id"
+                element={
+                  <PrivateElement
+                    redirectedTo="/auth"
+                    extraData={{ isAuthenticated: false }}
+                  >
+                    <Profile />
+                  </PrivateElement>
+                }
+              />
+              <Route path="/product" element={<Product />} />
+              {/* <Route path="/profile/:id" element={<Profile />} /> */}
+              <Route
+                path="*"
+                element={
+                  <main className="d-flex justify-content-center align-items-center p-4 fw-bold">
+                    <Button variant="success" className="big">
+                      <p>There's nothing here!</p>
+                    </Button>
+                  </main>
+                }
+              />
+            </Routes>
+          </Router>
+        </ThemeProvider>
+      </CartProvider>
+    </ReduxProvider>
   );
 }
 

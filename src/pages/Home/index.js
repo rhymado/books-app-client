@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { connect } from "react-redux";
 
 import "./Home.css";
 
@@ -88,7 +89,7 @@ class Home extends Component {
         </button>
         <button onClick={() => this.forceUpdate()}>Force Update</button>
         <Link to="/auth">
-          <button>Register Here</button>
+          <button>Register Here {this.props.number}</button>
         </Link>
         <section>
           <ul>
@@ -107,4 +108,13 @@ class Home extends Component {
 }
 Home.contextType = themeContext;
 
-export default withSearchParams(Home);
+const mapStateToProps = (reduxState) => {
+  const {
+    counter: { number },
+  } = reduxState;
+  return {
+    number,
+  };
+};
+
+export default connect(mapStateToProps)(withSearchParams(Home));
