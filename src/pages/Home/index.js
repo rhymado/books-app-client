@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import axios from "axios";
 import { connect } from "react-redux";
 
 import "./Home.css";
@@ -10,6 +9,8 @@ import Header from "../../components/Header";
 import withSearchParams from "../../helper/withSearchParams";
 
 import { themeContext } from "../../contexts/themeContext";
+import { getAllBooks } from "../../utils/books";
+import { getBooks } from "../../redux/actionCreator/books";
 
 class Home extends Component {
   constructor() {
@@ -33,9 +34,8 @@ class Home extends Component {
     //   .then((data) => console.log(data))
     //   .catch((err) => console.error(err));
     try {
-      const result = await axios.get(
-        "http://localhost:8080/book/all?page=2&limit=4"
-      );
+      const result = await getAllBooks();
+      // this.props.dispatch(getBooks());
       this.setState({
         books: result.data.list,
       });
@@ -91,11 +91,16 @@ class Home extends Component {
         <Link to="/auth">
           <button>Register Here {this.props.number}</button>
         </Link>
+        <button onClick={() => this.props.dispatch(getBooks())}>
+          GET books
+        </button>
         <section>
           <ul>
             {Array.isArray(this.state.books) ? (
               this.state.books.map((book) => (
-                <li key={book.id}>{book.title}</li>
+                <li style={{ textAlign: "left" }} key={book.id}>
+                  {book.title}
+                </li>
               ))
             ) : (
               <></>
