@@ -15,11 +15,18 @@ class Profile extends React.Component {
     counterChange: 0,
   };
   render() {
-    const { params, searchParams, number, doCounterDown, doCounterUp } =
-      this.props;
+    const {
+      params,
+      searchParams,
+      setSearchParams,
+      number,
+      doCounterDown,
+      doCounterUp,
+    } = this.props;
     // console.log(number);
     // return dengan <></>
     // return dengan Fragment
+    console.log(searchParams.toString());
     return (
       <React.Fragment>
         <h1>Profile id {params.id}</h1>
@@ -55,6 +62,17 @@ class Profile extends React.Component {
           <Link to="/">
             <div className="btn btn-large btn-success">Home</div>
           </Link>
+          <div
+            className="btn btn-large btn-outline-info"
+            onClick={() =>
+              setSearchParams({
+                name: "Andi",
+                location: "Bandung",
+              })
+            }
+          >
+            Change
+          </div>
         </footer>
       </React.Fragment>
     );

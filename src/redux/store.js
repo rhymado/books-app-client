@@ -1,6 +1,7 @@
 import { legacy_createStore as createStore, applyMiddleware } from "redux";
 import { createLogger } from "redux-logger";
 import rpm from "redux-promise-middleware";
+// import { persistStore } from "redux-persist";
 
 import reducers from "./reducers";
 

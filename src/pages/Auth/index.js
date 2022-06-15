@@ -41,7 +41,7 @@ class Auth extends Component {
         phone,
       };
       axios
-        .post("http://localhost:8080/auth/new", body)
+        .post(`${process.env.REACT_APP_HOST}/auth/new`, body)
         .then((result) => {
           console.log(result.data);
           localStorage.setItem(
