@@ -1,6 +1,4 @@
-<<<<<<< HEAD
 Aloha
-=======
 Welcome
 
 git clone <url-git> <directory>
@@ -22,4 +20,3 @@ git checkout feature
 
 git checkout -b <branch-name>
 git checkout -b postman
->>>>>>> postman
