@@ -1,1 +1,22 @@
+Aloha
 Welcome
+
+git clone <url-git> <directory>
+git clone https://github.com/rhymado/books-app-client.git book-app-client-2
+
+git pull
+
+git branch
+git branch -c <branch-to-be-copied> <new-branch>
+git branch -c master non-master
+
+git branch -m <branch-to-be-renamed> <new-branch-name>
+git branch -m non-master feature
+
+git branch -d <branch-to-be-deleted>
+
+git checkout <branch-name>
+git checkout feature
+
+git checkout -b <branch-name>
+git checkout -b postman
